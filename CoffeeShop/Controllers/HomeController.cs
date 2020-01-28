@@ -30,15 +30,39 @@ namespace CoffeeShop.Controllers
             return View();
         }
 
+        //public IActionResult Verify(/*string password, string confirm*/) 
+        //{
+        //    if (ViewBag.password == ViewBag.confirm)
+        //    {
+        //        return Registered();
+        //    }
+        //    else
+        //    {
+        //        return Wrong();
+        //    }
+        //}
+
+        public IActionResult Wrong()
+        {
+            return View();
+        }
+
         public IActionResult Registered(string username, string email, string password, string phone, int age, string favoritColor)
         {
-            ViewBag.Name = username;
-            ViewBag.Email = email;
-            ViewBag.Password = password;
-            ViewBag.Phone = phone;
-            ViewBag.Age = age;
-            ViewBag.FavoriteColor = favoritColor;
-            return View();
+            if (ViewBag.password == ViewBag.confirm)
+            {
+                ViewBag.Name = username;
+                ViewBag.Email = email;
+                ViewBag.Password = password;
+                ViewBag.Phone = phone;
+                ViewBag.Age = age;
+                ViewBag.FavoriteColor = favoritColor;
+                return View();
+            }
+            else
+            {
+                return Wrong();
+            }
         }
 
         //one action to take user inputs and diplay user name
