@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewData["Title"] = "RegisterView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>RegisterView</h1>
+
+<form asp-controller="Home" asp-action="MakeNewUser" onsubmit="return Validate()">
+    <div class="form-group">
+        <label>User Name</label>
+        <input type="text" class="form-control" name="username" required />
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="text" class="form-control" id="password" name="password" required />
+    </div>
+
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="text" class="form-control" id="confirmpasword" name="confirmpassword" />
+    </div>
+
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="form-control" btn btn-primary />
+    </div>
+</form>
+
+<script>
+    function Validate() {
+        //consol.log to know entering function
+        //grab firs input id=password
+        //grab 2nd id = confirm password
+        //use query selecor to grab value from input  "." is idnetify class # idenitfies id
+       
+        var password = document.querySelector("#password").value;
+        // var password = getElementById("password")
+        console.log(password);
+
+        //return to submit
+        var confirmpassword = document.querySelector(#confirmpassword).value
+        console.log(confirmpassword)
+
+        if (password == confirmpassword) {
+            console.log("return true");
+            return true;
+
+        } else {
+            console.log("return false");
+            return false;
+        }
+        //return false to stop
+        
+    }
+</script>

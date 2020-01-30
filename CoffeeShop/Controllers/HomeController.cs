@@ -20,11 +20,38 @@ namespace CoffeeShop.Controllers
 
         public IActionResult Index()
         {
+            ShopDBContext db = new ShopDBContext();
+            return View();
+        }
+
+        public IActionResult Shop()
+        {
+            ShopDBContext db = new ShopDBContext();
+     
+            return View();
+        }
+
+        public IActionResult Register(Users users)
+        {
+            ShopDBContext db = new ShopDBContext();
+            db.Users.Add(new Users()
+            {
+                Username = users.Username,
+                Email = users.Email,
+                Password = users.Password
+            });
+            db.Users.Add(users);
+            db.SaveChanges();
+            return View();
+        }
+
+        public IActionResult MakeNewUser(Users u)
+        {
             return View();
         }
 
         //need one action to load registraion page also need a view
-        public IActionResult Register()
+        public IActionResult Registers()
         {
             //if no view is speciified it default to action name
             return View();
