@@ -2,11 +2,28 @@
     ViewData["Title"] = "Home Page";
 }
 
+@using System.Text.Json
+<!--use razor to pull in dot net libraries
+System.Text.Json-->
+
+@model ShopDBContext
 
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about </p>
 </div>
+
+<h1>User object from TempData</h1>
+@{
+
+    //we use razor to allow to pull out thr users obj from tepdata and we use as usersto cast to type
+    var users = TempData["Users"] as Users;
+    //var users = JsonSerializer.Deserialize<Users>(TempData["JsonUsers"].ToString());
+}
+
+@users.Username
+@users.Email
+
 <!--registration link pointing to register tab-->
 <a asp-contoller="Home" asp-action="Register">Registration</a>

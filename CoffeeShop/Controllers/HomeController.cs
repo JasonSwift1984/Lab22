@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CoffeeShop.Models;
+using System.Text.Json;
+
+//Jason Swift
 
 namespace CoffeeShop.Controllers
 {
@@ -21,33 +24,49 @@ namespace CoffeeShop.Controllers
         public IActionResult Index()
         {
             ShopDBContext db = new ShopDBContext();
-            return View();
+            //GRAB A PERSON OBJ AND HOLD IN TEMP DATA
+            TempData["Users"]=db.Users.ToList()[0];
+
+            //use json serializer to make obj into json obj
+            //searilze takes a obj and builds a string that represent obj properties
+            TempData["JsonUsers"] = JsonSerializer.Serialize(db.Users.ToList()[0]);
+
+           // TempData.Keep();
+            TempData["bool"] = false;
+
+            return View(db);
         }
 
         public IActionResult Shop()
         {
-            ShopDBContext db = new ShopDBContext();
+            // ShopDBContext db = new ShopDBContext();
+            //ViewBag.items = new Items;
+            //ViewBag.Name = new name;
+            //ViewBag.Price = new price;
+            //ViewBag.Quanity = new quanity;
      
             return View();
         }
 
-        public IActionResult Register(Users users)
+
+        public IActionResult Register()
         {
-            ShopDBContext db = new ShopDBContext();
-            db.Users.Add(new Users()
-            {
-                Username = users.Username,
-                Email = users.Email,
-                Password = users.Password
-            });
-            db.Users.Add(users);
-            db.SaveChanges();
+          
             return View();
         }
 
         public IActionResult MakeNewUser(Users u)
         {
-            return View();
+            ShopDBContext db = new ShopDBContext();
+            //db.Users.Add(new Users()
+            //{
+            //    Username = users.Username,
+            //    Email = users.Email,
+            //    Password = users.Password
+            //});
+            db.Users.Add(u);
+            db.SaveChanges();
+            return View(u);
         }
 
         //need one action to load registraion page also need a view
